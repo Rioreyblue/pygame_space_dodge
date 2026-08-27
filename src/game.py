@@ -1,13 +1,14 @@
 import pygame
 import time
 import random
+pygame.font.init() #for font usage of time/elapsed
 
 WIDTH, HEIGHT = 1000, 800
 PLAYER_WIDTH = 40
 PLAYER_HEIGHT = 60
 PLAYER_VEL = 5
 
-def draw(WIN, BG, player1, player2):
+def draw(WIN, BG, player1, player2, elapsed_time):
     WIN.blit(BG, (0, 0))
     pygame.draw.rect(WIN, (255, 0, 0), player1)
     pygame.draw.rect(WIN, (0, 255, 0), player2)
@@ -34,7 +35,9 @@ def run_game():
 
     run = True
     while run:
+        #usage 
         clock.tick(60)  # Cap frame rate at 60 FPS
+        elapsed_time = time.time() - start_time
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -52,6 +55,6 @@ def run_game():
         if keys[pygame.K_RIGHT] and player2.x + PLAYER_VEL + PLAYER_WIDTH <=WIDTH:
             player2.x += PLAYER_VEL
 
-        draw(WIN, BG, player1, player2)
+        draw(WIN, BG, player1, player2, elapsed_time)
 
     pygame.quit()
