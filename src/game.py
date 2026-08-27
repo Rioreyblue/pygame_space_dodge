@@ -21,7 +21,14 @@ def run_game():
     pygame.display.set_caption("Space Dodge")
     BG = pygame.transform.scale(pygame.image.load("images/bg.jpeg"), (WIDTH, HEIGHT))
 
+    #for time display
+    start_time = time.time()
+    elapsed_time = 0
+    
+    #for lock framerate
     clock = pygame.time.Clock()
+    
+    #player
     player1 = pygame.Rect(200, HEIGHT - PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_HEIGHT)
     player2 = pygame.Rect(800, HEIGHT - PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_HEIGHT)
 
