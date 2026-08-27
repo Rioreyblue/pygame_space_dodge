@@ -7,9 +7,10 @@ PLAYER_WIDTH = 40
 PLAYER_HEIGHT = 60
 PLAYER_VEL = 5
 
-def draw(WIN, BG, player):
+def draw(WIN, BG, player1, player2):
     WIN.blit(BG, (0, 0))
-    pygame.draw.rect(WIN, (255, 0, 0), player)
+    pygame.draw.rect(WIN, (255, 0, 0), player1)
+    pygame.draw.rect(WIN, (0, 255, 0), player2)
     pygame.display.update()
 
 def run_game():
@@ -21,7 +22,8 @@ def run_game():
     BG = pygame.transform.scale(pygame.image.load("images/bg.jpeg"), (WIDTH, HEIGHT))
 
     clock = pygame.time.Clock()
-    player = pygame.Rect(WIDTH/2, HEIGHT - PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_HEIGHT)
+    player1 = pygame.Rect(200, HEIGHT - PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_HEIGHT)
+    player2 = pygame.Rect(800, HEIGHT - PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_HEIGHT)
 
     run = True
     while run:
@@ -32,13 +34,17 @@ def run_game():
                 run = False
                 break
 
-        # Movement controls
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT] and player.x - PLAYER_VEL >= 0:
-            player.x -= PLAYER_VEL
-        if keys[pygame.K_RIGHT] and player.x + PLAYER_VEL + PLAYER_WIDTH <= WIDTH:
-            player.x += PLAYER_VEL
+        if keys[pygame.K_a] and player1.x - PLAYER_VEL >=0:
+            player1.x -= PLAYER_VEL
+        if keys[pygame.K_d] and player1.x + PLAYER_VEL + PLAYER_WIDTH <= WIDTH:
+            player1.x += PLAYER_VEL
+            
+        if keys[pygame.K_LEFT] and player2.x - PLAYER_VEL >=0:
+            player2.x -= PLAYER_VEL
+        if keys[pygame.K_RIGHT] and player2.x + PLAYER_VEL + PLAYER_WIDTH <=WIDTH:
+            player2.x += PLAYER_VEL
 
-        draw(WIN, BG, player)
+        draw(WIN, BG, player1, player2)
 
     pygame.quit()
