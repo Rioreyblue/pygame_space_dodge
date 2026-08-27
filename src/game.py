@@ -8,8 +8,12 @@ PLAYER_WIDTH = 40
 PLAYER_HEIGHT = 60
 PLAYER_VEL = 5
 
+FONT = pygame.font.SysFont("poppins", 30) #creating font object
+
 def draw(WIN, BG, player1, player2, elapsed_time):
     WIN.blit(BG, (0, 0))
+    time_text = FONT.render(f"Time: {round(elapsed_time)}s", 1, "white")
+    WIN.blit(time_text, (10,10))
     pygame.draw.rect(WIN, (255, 0, 0), player1)
     pygame.draw.rect(WIN, (0, 255, 0), player2)
     pygame.display.update()
