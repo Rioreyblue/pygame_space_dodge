@@ -41,6 +41,7 @@ def run_game():
     #boulders
     BOULDER_WIDTH = 10
     BOULDER_HEIGHT = 20
+    BOULDER_VEL = 5
     boulder_add_increment = 2000
     boulder_count = 0
 
@@ -78,6 +79,13 @@ def run_game():
             player2.x -= PLAYER_VEL
         if keys[pygame.K_RIGHT] and player2.x + PLAYER_VEL + PLAYER_WIDTH <=WIDTH:
             player2.x += PLAYER_VEL
+        
+        for boulder in boulders[:]:
+            boulder.y += BOULDER_VEL
+            if boulder.y  > HEIGHT:
+                boulders.remove(boulder)
+            
+                
 
         draw(WIN, BG, player1, player2, elapsed_time)
 
