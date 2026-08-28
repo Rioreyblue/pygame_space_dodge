@@ -10,12 +10,15 @@ PLAYER_VEL = 5
 
 FONT = pygame.font.SysFont("poppins", 30) #creating font object
 
-def draw(WIN, BG, player1, player2, elapsed_time):
+def draw(WIN, BG, player1, player2, elapsed_time, boulders):
     WIN.blit(BG, (0, 0))
     time_text = FONT.render(f"Time: {round(elapsed_time)}s", 1, "white")
     WIN.blit(time_text, (10,10))
     pygame.draw.rect(WIN, (255, 0, 0), player1)
     pygame.draw.rect(WIN, (0, 255, 0), player2)
+    
+    for boulder in boulders:
+        pygame.draw.rect(WIN, "white", boulder)
     pygame.display.update()
 
 def run_game():
@@ -46,6 +49,7 @@ def run_game():
     boulder_count = 0
 
     boulders = []
+    hit = False
 
 
     run = True
@@ -90,6 +94,6 @@ def run_game():
                 break
                 
 
-        draw(WIN, BG, player1, player2, elapsed_time)
+        draw(WIN, BG, player1, player2, elapsed_time, boulders)
 
     pygame.quit()
