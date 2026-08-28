@@ -84,7 +84,10 @@ def run_game():
             boulder.y += BOULDER_VEL
             if boulder.y  > HEIGHT:
                 boulders.remove(boulder)
-            
+            elif boulder.y >= player1.y and player2 and boulder.colliderect(player1 and player2):
+                boulders.remove(boulder)
+                hit = True
+                break
                 
 
         draw(WIN, BG, player1, player2, elapsed_time)
