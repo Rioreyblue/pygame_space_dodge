@@ -44,7 +44,7 @@ def run_game():
     boulder_add_increment = 2000
     boulder_count = 0
 
-    boulder = []
+    boulders = []
 
 
     run = True
@@ -57,7 +57,11 @@ def run_game():
         if boulder_count > boulder_add_increment:
             for _ in range(3):
                 boulder_x = random.randint(0,WIDTH - BOULDER_WIDTH)
-                boulder = pygame.Rect(boulder_x, - BOULDER_HEIGHT)
+                boulder = pygame.Rect(boulder_x, -BOULDER_HEIGHT, BOULDER_WIDTH, BOULDER_HEIGHT)
+                boulders.append(boulder)
+                
+            boulder_add_increment = max(200, boulder_add_increment - 50)
+            boulder_count = 0
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
