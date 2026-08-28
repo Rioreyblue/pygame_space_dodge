@@ -37,11 +37,27 @@ def run_game():
     player1 = pygame.Rect(200, HEIGHT - PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_HEIGHT)
     player2 = pygame.Rect(800, HEIGHT - PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_HEIGHT)
 
+
+    #boulders
+    BOULDER_WIDTH = 10
+    BOULDER_HEIGHT = 20
+    boulder_add_increment = 2000
+    boulder_count = 0
+
+    boulder = []
+
+
     run = True
     while run:
         #usage 
-        clock.tick(60)  # Cap frame rate at 60 FPS
+        # clock.tick(60)  # Cap frame rate at 60 FPS
+        boulder_count += clock.tick(60)
         elapsed_time = time.time() - start_time
+
+        if boulder_count > boulder_add_increment:
+            for _ in range(3):
+                boulder_x = random.randint(0,WIDTH - BOULDER_WIDTH)
+                boulder = pygame.Rect(boulder_x, - BOULDER_HEIGHT)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
