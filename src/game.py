@@ -92,6 +92,10 @@ def run_game():
                 boulders.remove(boulder)
                 hit = True
                 break
+            
+        if hit:
+            lost_text = FONT.render("You Lost", 1, (255,0,0))
+            WIN.blit(lost_text,(WIDTH/2 - lost_text.get_width()/2,HEIGHT/2 - lost_text.get_height()/2))
                 
 
         draw(WIN, BG, player1, player2, elapsed_time, boulders)
