@@ -49,7 +49,8 @@ def run_game():
     boulder_count = 0
 
     boulders = []
-    hit = False
+    # hit = False
+    losing_player = None
 
 
     run = True
@@ -84,17 +85,29 @@ def run_game():
         if keys[pygame.K_RIGHT] and player2.x + PLAYER_VEL + PLAYER_WIDTH <=WIDTH:
             player2.x += PLAYER_VEL
         
+        # for boulder in boulders[:]:
+        #     boulder.y += BOULDER_VEL
+        #     if boulder.y  > HEIGHT:
+        #         boulders.remove(boulder)
+        #     elif boulder.y * boulder.height >= player1.y and player2 and boulder.colliderect(player1 and player2):
+        #         boulders.remove(boulder)
+        #         hit = True
+        #         break
         for boulder in boulders[:]:
-            boulder.y += BOULDER_VEL
-            if boulder.y  > HEIGHT:
+            boulder.y += BOULDER_VEL    
+
+            if boulder.y > HEIGHT:
                 boulders.remove(boulder)
-            elif boulder.y * boulder.height >= player1.y and player2 and boulder.colliderect(player1 and player2):
-                boulders.remove(boulder)
-                hit = True
+            elif boulder.colliderect(player1):
+                losing_player = "player 1 (red)"
                 break
+            elif boulder.colliderect(player2):
+                losing_player = "player 2 (green)"
+                break
+        
             
-        if hit:
-            lost_text = FONT.render("You Lost", 1, (255,0,0))
+        if losing_player:
+            lost_text = FONT.render(f"You Lost: {losing_player}", 1, (255,0,0))
             WIN.blit(lost_text,(WIDTH/2 - lost_text.get_width()/2,HEIGHT/2 - lost_text.get_height()/2))
             pygame.display.update()
             pygame.time.delay(4000)
